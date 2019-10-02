@@ -96,8 +96,8 @@ function highlightFeature(e) {
     // select the update class, and update the contet with the input value.
     $(".update").html(
       '<b>' + layer.feature.properties.Geography +'</b><br>'
-            + layer.feature.properties.County + ' County'+'</b><br>'
-            + layer.feature.properties.Food_Vulne + ' FVI Value<br>');
+            + layer.feature.properties.County + ' County'+'<br>'
+            + 'FVI Value: ' + layer.feature.properties.Food_Vulne.toFixed(5) + '<br>');
 }
 
 
@@ -156,4 +156,4 @@ legend.addTo(mymap);
 //attribution
 $(".leaflet-control-attribution")
   .css("background-color", "transparent")
-  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> | Tool created by: <a href='#' target='_blank'>Benji Antolin");
+  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> | Web Map by: <a href='#' target='_blank'>Benji Antolin");
