@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>DEI Language Tool</title>
+  <title>FVI Tool</title>
   <!-- css stylesheets -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
@@ -25,26 +25,48 @@
 <body>
   <div id="map"></div>
   <div id='sidebar'>
-    <div id="title"><i class="fas fa-globe"></i> Food Vulnerability Index</div>
-    <div class='update'>Hover over a Census Tract</div>
-
-  </div>
-  <!-- <div id="sidebar" data-simplebar data-simplebar-auto-hide="false">
-    <div id="title"><i class="fas fa-tachometer-alt"></i> Irrigation Calculator
+    <div id="title"><i class="fas fa-globe"></i> Food Vulnerability Index
       <span><a href="#"><i class="fab fa-facebook"></i></a></span>
       <span><a href="#"><i class="fab fa-instagram"></i></a></span>
       <span><a href="#"><i class="fab fa-twitter-square"></i></a></span>
       <span><a data-toggle="modal" data-target="#disclaimer"><i class="nav fas fa-question-circle"></i></a></span>
     </div>
-    <p style="font-size:small; font-style:italic"> Please work through the order of the following steps to calculate the water for irrigation.</p>
-    <div class="step">
-      <span><img src="img\logoonwhite.png" id="twcaLogo" class="logo-thumbnail" alt="twcaLogo"></span>
-      <span><img src="img\pennington-logo-(minus-glow).jpg" id="penningtonLogo" class="logo-thumbnail" alt="penningtonLogo"></span>
-      <span><img src="img\proseeds_final.jpg" id="proseedsLogo" class="logo-thumbnail" alt="proseedsLogo"></span>
-      <span><img src="img\Pure seed.jpg" id="pureseedLogo" class="logo-thumbnail" alt="pureseedLogo"></span>
-    </div>
+    <div class='update'>Hover over a Census Tract</div>
+  </div>
 
-  </div> -->
+  <div id="disclaimer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width:1250px!important">
+      <div class="modal-content">
+        <div class="modal-header">
+          <strong class="modal-title" id="exampleModalLongTitle">Disclaimer</strong>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="demo" class="carousel slide" data-ride="carousel">
+            <p>This calculator is intended only as a watering guide and is based on historical data. For greater accuracy we recommend consulting with your local extension agency. Please make sure your watering practice complies with state and local
+              ordinances. For more information about this calculator contact us at <a href="mailto://info@tgwca.org">info@tgwca.org</a>.</p>
+            <h5>What impact does soil have on my water need?</h5>
+            <p>While soil texture doesn’t impact water demand it does affect recommended watering frequency. Sandy soils require more frequent watering with shorter run times. If you’re unsure about your soil type check with your local extension
+              agent.</p>
+            <h5>How do I know if my turf is TWCA Qualified?</h5>
+            <p>All TWCA qualified cultivars carry the TWCA seal. You can learn more about the TWCA Qualified cultivars at <a href="https://www.tgwca.org/list-of-qualified-products1.html">https://www.tgwca.org/list-of-qualified-products1.html</a>. For more information contact us at <a href="mailto://info@tgwca.org">info@tgwca.org</a>. If you’re unsure it
+              is best to assume your turf is not TWCA Qualified.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="col-md-10">
+            <span id="mapType">Don't show this info again.</span>
+            <label id="nextTimeSwitcher" class="switch">
+              <input type="checkbox">
+            </label>
+          </div>
+          <button id="disclaimer-close" type="button" class="btn btn-primary col-md-2">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
