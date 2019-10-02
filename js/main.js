@@ -1,6 +1,35 @@
 $(window).ready(function() {
   $('.loader').fadeOut("slow");
+
+  $("#nextTimeSwitcher input").on("click", function() {
+    if ($("#nextTimeSwitcher input:checked").val() === "on") {
+      localStorage.setItem('popState', 'shown');
+    } else {
+
+      localStorage.setItem('popState', 'notShown');
+    }
+  })
+
+  if (localStorage.getItem('popState') != 'shown') {
+    console.log("show disclaimer");
+    $('#disclaimer').modal('show');
+
+  } else {
+    console.log("hide disclaimer");
+    $('#disclaimer').modal('hide');
+  }
+  $('#disclaimer-close').click(function(e) // You are clicking the close button
+    {
+      $('#disclaimer').fadeOut(); // Now the pop up is hiden.
+      $('#disclaimer').modal('hide');
+    });
 });
+
+$(".showFrontPage").on("click", function() {
+  $('#disclaimer').modal('show');
+  localStorage.setItem('popState', 'notShown');
+})
+
 // 1. Create a map object.
 var mymap = L.map('map', {
     center: [44, -121.5],
@@ -10,43 +39,15 @@ var mymap = L.map('map', {
     zoomcontrol: false,
     detectRetina: true });
 
-// $(".leaflet-control-zoom").hide();
+$(".leaflet-control-zoom").hide();
 
-// L.control.scale({
-//   position: 'topright'
-// }).addTo(mymap);
+L.control.scale({
+  position: 'topright'
+}).addTo(mymap);
 
 // 2. Add a base map.
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
-
-
-// 4. build up a set of colors from colorbrewer's dark2 category
-var colors = chroma.scale('RdYlBu').mode('lch').colors(2);
-
-// 5. dynamically append style classes to this page. This style classes will be used for colorize the markers.
-for (i = 0; i < 2; i++) {
-    $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
-}
-
-//get airport.geojson data
-// airports= L.geoJson.ajax("assets/airports.geojson",{
-
-//add popup window
-// onEachFeature: function (feature, layer) {
-// layer.bindPopup('Airport Name: '+feature.properties.AIRPT_NAME +'<br> City: '+feature.properties.CITY +'<br> County: '+feature.properties.COUNTY +'<br> State: '+feature.properties.STATE)
-// },
-//
-// pointToLayer: function (feature, latlng) {
-// var id = 0;
-// if (feature.properties.CNTL_TWR == "N") { id = 0; }
-// else { id = 1;}
-// return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-plane marker-color-' + (id + 1).toString() })});
-// },
-//
-// attribution: 'Airport Data &copy; data.gov | US States &copy; Mike Bostock of D3 | Base Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Made By Benjamin Antolin'
-// })
-// .addTo(mymap);
-
+// L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 // 6. Set function for color ramp
 colors = chroma.scale('RdYlBu').colors(7); //colors = chroma.scale('OrRd').colors(5);
 
@@ -74,19 +75,6 @@ function style(feature) {
     };
 }
 
-// function style1(feature) {
-//     return {
-//         fillColor: black,
-//         fillOpacity: 0.4,
-//         weight: 1,
-//         opacity: 1,
-//         color: '#b4b4b4',
-//         dashArray: '4'
-//     };
-// }
-
-// 3. add the state layer to the map. Also, this layer has some interactive features.
-
 // 3.1 declare an empty/null geojson object
 var county = null;
 
@@ -112,10 +100,6 @@ function highlightFeature(e) {
             + layer.feature.properties.Food_Vulne + ' FVI Value<br>');
 }
 
-// 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
-// function zoomToFeature(e) {
-//     mymap.fitBounds(e.target.getBounds());
-// }
 
 // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
 function resetHighlight(e) {
@@ -127,7 +111,6 @@ function resetHighlight(e) {
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
-        // click: zoomToFeature,
         mouseout: resetHighlight
     });
 }
@@ -169,5 +152,8 @@ legend.onAdd = function () {
 
 // 11. Add a legend to map
 legend.addTo(mymap);
-// 12. Add a scale bar to map
-// L.control.scale({position: 'bottomleft'}).addTo(mymap);
+
+//attribution
+$(".leaflet-control-attribution")
+  .css("background-color", "transparent")
+  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> Created by: <a href='#' target='_blank'>Benji Antolin");
