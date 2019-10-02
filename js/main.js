@@ -156,4 +156,4 @@ legend.addTo(mymap);
 //attribution
 $(".leaflet-control-attribution")
   .css("background-color", "transparent")
-  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> Created by: <a href='#' target='_blank'>Benji Antolin");
+  .html("Supported by <a href='https://oregonexplorer.info/topics/rural-communities?ptopic=140' target='_blank'>The RCE @ Oregon State University </a> | Tool created by: <a href='#' target='_blank'>Benji Antolin");
