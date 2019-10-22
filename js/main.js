@@ -49,7 +49,7 @@ L.control.scale({
 // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 // 6. Set function for color ramp
-colors = chroma.scale('RdYlBu').colors(7); //colors = chroma.scale('OrRd').colors(5);
+colors = chroma.scale(['blue','yellow', 'red']).colors(7); //colors = chroma.scale('OrRd').colors(5);
 
 function setColor(density) {
     var id = 0;
